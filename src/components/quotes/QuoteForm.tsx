@@ -4,9 +4,9 @@ import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./QuoteForm.module.css";
 
-type EnteredQuote = {
-  author: string | undefined;
-  text: string | undefined;
+export type EnteredQuote = {
+  author: string;
+  text: string;
 };
 
 const QuoteForm = ({

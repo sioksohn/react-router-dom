@@ -1,12 +1,8 @@
 import classes from "./QuoteItem.module.css";
-type ItemType = {
-  key: string;
-  id: string;
-  author: string;
-  text: string;
-};
 
-const QuoteItem = (props: ItemType) => {
+type QuteItemProps = { key: string; id: string; author: string; text: string };
+
+const QuoteItem = (props: QuteItemProps) => {
   return (
     <li className={classes.item}>
       <figure>
