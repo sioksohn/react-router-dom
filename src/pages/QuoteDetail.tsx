@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import { useParams, Route } from "react-router-dom";
+
 import Comments from "../components/comments/Comments";
+import HighlightedQuote from "../components/quotes/HighlightedQuote";
+import { DUMMY_QUOTES } from "./AllQuotes";
 
 type QuoteParam = {
   quoteId: string;
@@ -8,10 +11,13 @@ type QuoteParam = {
 
 const QuoteDetail = () => {
   const { quoteId } = useParams<QuoteParam>();
+  const quote = DUMMY_QUOTES.find((quote) => quote.id === quoteId);
+  if (!quote) {
+    return <p>No quote found!</p>;
+  }
   return (
     <Fragment>
-      <h1>Quote Detail Page</h1>
-      <p>{quoteId}</p>
+      <HighlightedQuote text={quote.text} author={quote.author} />
       <Route path={`/quotes/${quoteId}/comments`}>
         <Comments />
       </Route>
