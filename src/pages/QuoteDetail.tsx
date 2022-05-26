@@ -3,7 +3,11 @@ import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
 
 import Comments from "../components/comments/Comments";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
-import { DUMMY_QUOTES } from "./AllQuotes";
+
+const DUMMY_QUOTES = [
+  { id: "q1", author: "Aiden", text: "엄마는 히미세요." },
+  { id: "q2", author: "Brandon", text: "I love you most." },
+];
 
 type QuoteParam = {
   quoteId: string;
