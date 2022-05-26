@@ -3,7 +3,6 @@ import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
 
 import Comments from "../components/comments/Comments";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
-import { DUMMY_QUOTES } from "./AllQuotes";
 
 type QuoteParam = {
   quoteId: string;

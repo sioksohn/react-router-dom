@@ -49,7 +49,7 @@ function useHttp(
   });
 
   const sendRequest = useCallback(
-    async function (requestData: any) {
+    async function (requestData?: any) {
       dispatch({ type: "SEND" });
       try {
         const responseData = await requestFunction(requestData);
