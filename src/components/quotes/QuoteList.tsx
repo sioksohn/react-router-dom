@@ -19,10 +19,13 @@ const sortQuotes = (quotes: Quote[], ascending: boolean) => {
     }
   });
 };
-
+interface StateType {
+  from: { pathname: string };
+}
 const QuoteList = ({ quotes }: { quotes: Quote[] }) => {
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<StateType>();
+  const { pathname } = location;
 
   const queryParams = new URLSearchParams(location.search);
 
@@ -31,7 +34,7 @@ const QuoteList = ({ quotes }: { quotes: Quote[] }) => {
   const sortedQuotes = sortQuotes(quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    history.push("/quotes?sort=" + (isSortingAscending ? "desc" : "asc"));
+    history.push(`${pathname}?sort=${isSortingAscending ? "desc" : "asc"}`);
   };
 
   return (
