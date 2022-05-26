@@ -18,11 +18,13 @@ const QuoteDetail = () => {
   return (
     <Fragment>
       <HighlightedQuote text={quote.text} author={quote.author} />
-      <div className="centered">
-        <Link className="btn--flat" to={`/quotes/${quoteId}/comments`}>
-          Load Comments
-        </Link>
-      </div>
+      <Route path={`/quotes/${quoteId}`} exact>
+        <div className="centered">
+          <Link className="btn--flat" to={`/quotes/${quoteId}/comments`}>
+            Load Comments
+          </Link>
+        </div>
+      </Route>
       <Route path={`/quotes/${quoteId}/comments`}>
         <Comments />
       </Route>
