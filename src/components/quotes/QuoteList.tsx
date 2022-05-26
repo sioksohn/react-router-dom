@@ -34,7 +34,10 @@ const QuoteList = ({ quotes }: { quotes: Quote[] }) => {
   const sortedQuotes = sortQuotes(quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    history.push(`${pathname}?sort=${isSortingAscending ? "desc" : "asc"}`);
+    history.push({
+      pathname: pathname,
+      search: `?sort=${isSortingAscending ? "desc" : "asc"}`,
+    });
   };
 
   return (
