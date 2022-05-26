@@ -1,5 +1,6 @@
 import { useReducer, useCallback } from "react";
 import { EnteredQuote } from "../components/quotes/QuoteForm";
+import { EnteredComment } from "../components/comments/NewCommentForm";
 
 type Action =
   | { type: "SEND" }
@@ -40,10 +41,7 @@ function httpReducer(state: State, action: Action) {
   return state;
 }
 
-function useHttp(
-  requestFunction: (args: any) => void,
-  startWithPending = false
-) {
+function useHttp(requestFunction: any, startWithPending = false) {
   const [httpState, dispatch] = useReducer(httpReducer, {
     status: startWithPending ? "pending" : null,
     data: null,
@@ -51,7 +49,7 @@ function useHttp(
   });
 
   const sendRequest = useCallback(
-    async function (requestData?: EnteredQuote | string) {
+    async function (requestData?: EnteredQuote | EnteredComment | string) {
       dispatch({ type: "SEND" });
       try {
         const responseData = await requestFunction(requestData);
