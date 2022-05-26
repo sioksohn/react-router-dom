@@ -1,13 +1,16 @@
 import { useReducer, useCallback } from "react";
+import { EnteredQuote } from "../components/quotes/QuoteForm";
+import { EnteredComment } from "../components/comments/NewCommentForm";
+
 type Action =
   | { type: "SEND" }
   | { type: "SUCCESS"; responseData: any }
   | { type: "ERROR"; errorMessage: string };
 
 interface State {
-  data: null | any;
-  error: null | any;
-  status: null | any;
+  data: null | EnteredQuote | EnteredComment | string;
+  error: null | string;
+  status: null | string;
 }
 
 function httpReducer(state: State, action: Action) {
@@ -46,7 +49,7 @@ function useHttp(requestFunction: any, startWithPending = false) {
   });
 
   const sendRequest = useCallback(
-    async function (requestData?: any) {
+    async function (requestData?: EnteredQuote | EnteredComment | string) {
       dispatch({ type: "SEND" });
       try {
         const responseData = await requestFunction(requestData);

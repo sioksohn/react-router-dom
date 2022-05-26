@@ -13,10 +13,8 @@ type QuoteParam = {
 
 const QuoteDetail = () => {
   const match = useRouteMatch();
-  // console.log(match);
   const { path, url } = match;
   const { quoteId } = useParams<QuoteParam>();
-
   const {
     sendRequest,
     status,

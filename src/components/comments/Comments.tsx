@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-
 import classes from "./Comments.module.css";
 import NewCommentForm from "./NewCommentForm";
 import useHttp from "../../hooks/use-http";
@@ -14,10 +13,8 @@ type QuoteParam = {
 
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
-  const params = useParams<QuoteParam>();
-  const { quoteId } = params;
+  const { quoteId } = useParams<QuoteParam>();
   const { sendRequest, status, data: loadedComments } = useHttp(getAllComments);
-
   useEffect(() => {
     sendRequest(quoteId);
   }, [quoteId, sendRequest]);
@@ -28,6 +25,7 @@ const Comments = () => {
   const addedCommentHandler = useCallback(() => {
     sendRequest(quoteId);
   }, [sendRequest, quoteId]);
+
   let comments;
 
   if (status === "pending") {
@@ -37,7 +35,6 @@ const Comments = () => {
       </div>
     );
   }
-
   if (status === "completed" && loadedComments && loadedComments.length > 0) {
     comments = <CommentsList comments={loadedComments} />;
   }
@@ -48,7 +45,6 @@ const Comments = () => {
   ) {
     comments = <p className="centered">No comments were added yet!</p>;
   }
-
   return (
     <section className={classes.comments}>
       <h2>User Comments</h2>

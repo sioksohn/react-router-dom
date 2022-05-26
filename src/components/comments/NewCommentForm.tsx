@@ -1,19 +1,24 @@
 import React, { useRef, useEffect } from "react";
+import classes from "./NewCommentForm.module.css";
 import useHttp from "../../hooks/use-http";
 import { addComment } from "../../lib/api";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import classes from "./NewCommentForm.module.css";
 
 type NewComment = {
   quoteId: string;
   onAddedComment: any;
 };
+export type EnteredComment = { commentData: { text: string }; quoteId: string };
 
-const NewCommentForm = (props: NewComment) => {
+const NewCommentForm = ({ quoteId, onAddedComment }: NewComment) => {
   const commentTextRef = useRef<HTMLTextAreaElement>(null);
   const { sendRequest, status, error } = useHttp(addComment);
 
-  const { onAddedComment } = props;
+  useEffect(() => {
+    if (status === "completed" && !error) {
+      onAddedComment();
+    }
+  }, [status, error, onAddedComment]);
 
   useEffect(() => {
     if (status === "completed" && !error) {
@@ -22,10 +27,9 @@ const NewCommentForm = (props: NewComment) => {
   }, [status, error, onAddedComment]);
   const submitFormHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    // optional: Could validate here
     const enteredText = commentTextRef.current!.value;
     // send comment to server
-    sendRequest({ commentData: { text: enteredText }, quoteId: props.quoteId });
+    sendRequest({ commentData: { text: enteredText }, quoteId: quoteId });
   };
 
   return (

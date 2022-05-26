@@ -17,9 +17,10 @@ const NewQuote = () => {
 
   const addQuoteHandler = (quoteData: EnteredQuote) => {
     sendRequest(quoteData);
-    history.push("/quotes");
   };
-  return <QuoteForm isLoading={false} onAddQuote={addQuoteHandler} />;
+  return (
+    <QuoteForm isLoading={status === "pending"} onAddQuote={addQuoteHandler} />
+  );
 };
 
 export default NewQuote;
